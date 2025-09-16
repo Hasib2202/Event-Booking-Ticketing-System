@@ -18,6 +18,7 @@ interface Event {
   availableSeats: number;
   totalSeats: number;
   category: string;
+  image?: string;
 }
 
 const EventBookingLanding = () => {
@@ -293,7 +294,15 @@ const EventBookingLanding = () => {
                 >
                   <div className="relative overflow-hidden">
                     <div className="w-full h-48 bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center transition-all duration-500 group-hover:from-blue-600 group-hover:to-purple-700">
-                      <Calendar className="h-16 w-16 text-white opacity-60" />
+                      {event.image ? (
+                        <img
+                          src={event.image}
+                          alt={event.title}
+                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                        />
+                      ) : (
+                        <Calendar className="h-16 w-16 text-white opacity-60" />
+                      )}
                     </div>
                     <div className="absolute top-4 left-4">
                       <Badge className="bg-black text-white capitalize">

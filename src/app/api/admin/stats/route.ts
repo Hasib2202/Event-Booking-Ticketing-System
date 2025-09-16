@@ -1,6 +1,6 @@
 // src/app/api/admin/stats/route.ts
 import { NextRequest } from 'next/server';
-import connectDB from '@/lib/database/mongodb';
+import { connectDB } from '@/lib/database/mongodb';
 import Event from '@/models/Event';
 import Booking from '@/models/Booking';
 import { successResponse, errorResponse } from '@/lib/utils/response';

@@ -21,6 +21,7 @@ interface Event {
   availableSeats: number;
   totalSeats: number;
   category: string;
+  image?: string;
 }
 
 export default function EventsPage() {
@@ -142,8 +143,16 @@ export default function EventsPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {events.map((event) => (
             <Card key={event._id} className="hover:shadow-lg transition-shadow">
-              <div className="h-48 bg-gradient-to-r from-blue-500 to-purple-600 rounded-t-lg flex items-center justify-center">
-                <Calendar className="h-16 w-16 text-white opacity-50" />
+              <div className="h-48 bg-gradient-to-r from-blue-500 to-purple-600 rounded-t-lg flex items-center justify-center overflow-hidden">
+                {event.image ? (
+                  <img
+                    src={event.image}
+                    alt={event.title}
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  <Calendar className="h-16 w-16 text-white opacity-50" />
+                )}
               </div>
               <CardHeader>
                 <div className="flex justify-between items-start">

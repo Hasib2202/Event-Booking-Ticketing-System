@@ -24,6 +24,7 @@ interface Event {
   availableSeats: number;
   totalSeats: number;
   category: string;
+  image?: string;
 }
 
 export default function EventDetailPage({ params }: { params: Promise<{ id: string }> }) {
@@ -154,9 +155,17 @@ export default function EventDetailPage({ params }: { params: Promise<{ id: stri
           <Badge className="ml-4 text-sm">{event.category}</Badge>
         </div>
 
-        {/* Event Image Placeholder */}
-        <div className="h-64 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center mb-6">
-          <Calendar className="h-24 w-24 text-white opacity-50" />
+        {/* Event Image */}
+        <div className="h-64 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center mb-6 overflow-hidden">
+          {event.image ? (
+            <img
+              src={event.image}
+              alt={event.title}
+              className="w-full h-full object-cover rounded-lg"
+            />
+          ) : (
+            <Calendar className="h-24 w-24 text-white opacity-50" />
+          )}
         </div>
       </div>
 

@@ -1,6 +1,6 @@
 // src/app/api/bookings/[id]/route.ts
 import { NextRequest } from 'next/server';
-import connectDB from '@/lib/database/mongodb';
+import { connectDB } from '@/lib/database/mongodb';
 import Booking from '@/models/Booking';
 import Event from '@/models/Event';
 import User from '@/models/User';

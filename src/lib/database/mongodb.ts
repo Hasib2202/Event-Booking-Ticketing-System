@@ -1,10 +1,10 @@
 // src/lib/database/mongodb.ts
 import mongoose from 'mongoose';
 
-const MONGODB_URI = process.env.MONGODB_URI!;
+const MONGODB_URI = process.env.MONGODB_URI as string;
 
 if (!MONGODB_URI) {
-  throw new Error('Please define the MONGODB_URI environment variable inside .env.local');
+  throw new Error("❌ Please define MONGODB_URI in your environment variables");
 }
 
 interface MongooseCache {
@@ -22,22 +22,22 @@ if (!cached) {
   cached = global.mongoose = { conn: null, promise: null };
 }
 
-async function connectDB(): Promise<typeof mongoose> {
+export async function connectDB(): Promise<typeof mongoose> {
   if (cached!.conn) {
     return cached!.conn;
   }
 
   if (!cached!.promise) {
-    const opts = {
+    cached!.promise = mongoose.connect(MONGODB_URI, {
+      maxPoolSize: 10, // limit per app instance
+      serverSelectionTimeoutMS: 5000, // avoid long hangs
       bufferCommands: false,
-    };
-
-    cached!.promise = mongoose.connect(MONGODB_URI, opts).then((mongoose) => {
-      console.log('✅ Connected to MongoDB');
+    }).then((mongoose) => {
+      console.log("✅ Connected to MongoDB");
       return mongoose;
-    }).catch((error) => {
-      console.error('❌ MongoDB connection error:', error);
-      throw error;
+    }).catch((err) => {
+      console.error("❌ MongoDB connection error:", err);
+      throw err;
     });
   }
 
@@ -51,4 +51,3 @@ async function connectDB(): Promise<typeof mongoose> {
   return cached!.conn;
 }
 
-export default connectDB;

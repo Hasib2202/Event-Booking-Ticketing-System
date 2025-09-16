@@ -14,6 +14,7 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Alert, AlertDescription } from '@/components/ui/alert';
+import ImageUpload from '@/components/ui/image-upload';
 import { Loader2, ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
 import { toast } from 'sonner';
@@ -26,6 +27,7 @@ type EventFormData = {
   price: number;
   totalSeats: number;
   category: string;
+  image?: string;
 };
 
 interface Event {
@@ -38,6 +40,7 @@ interface Event {
   totalSeats: number;
   availableSeats: number;
   category: string;
+  image?: string;
 }
 
 export default function EditEventPage({ params }: { params: Promise<{ id: string }> }) {
@@ -94,6 +97,7 @@ export default function EditEventPage({ params }: { params: Promise<{ id: string
           price: eventData.price,
           totalSeats: eventData.totalSeats,
           category: eventData.category,
+          image: eventData.image || '',
         });
       } else {
         toast({
@@ -306,6 +310,18 @@ export default function EditEventPage({ params }: { params: Promise<{ id: string
                   </p>
                 )}
               </div>
+            </div>
+
+            <div className="space-y-2">
+              <Label>Event Image (Optional)</Label>
+              <ImageUpload
+                value={watch('image')}
+                onChange={(imageUrl) => setValue('image', imageUrl || '')}
+                disabled={isLoading}
+              />
+              <p className="text-sm text-gray-500">
+                Upload an image to make your event more attractive to attendees.
+              </p>
             </div>
 
             <div className="flex gap-4 pt-6">

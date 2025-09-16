@@ -1,25 +1,25 @@
 // src/components/layout/Navbar.tsx
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { useSession, signOut } from 'next-auth/react';
-import Link from 'next/link';
-import { Button } from '@/components/ui/button';
+import { useState } from "react";
+import { useSession, signOut } from "next-auth/react";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import { Avatar, AvatarFallback } from '@/components/ui/avatar';
-import { Menu, X, Calendar, User, Settings, LogOut } from 'lucide-react';
+} from "@/components/ui/dropdown-menu";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Menu, X, Calendar, User, LogOut } from "lucide-react";
 
 export default function Navbar() {
   const { data: session, status } = useSession();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleSignOut = () => {
-    signOut({ callbackUrl: '/' });
+    signOut({ callbackUrl: "/" });
   };
 
   return (
@@ -30,7 +30,9 @@ export default function Navbar() {
           <div className="flex items-center">
             <Link href="/" className="flex items-center space-x-3">
               <Calendar className="h-10 w-10 text-black" />
-              <span className="text-2xl font-bold text-black tracking-tight">EventBook</span>
+              <span className="text-2xl font-bold text-black tracking-tight">
+                EventBook
+              </span>
             </Link>
           </div>
 
@@ -43,7 +45,7 @@ export default function Navbar() {
               Events
             </Link>
 
-            {status === 'loading' ? (
+            {status === "loading" ? (
               <div className="animate-pulse bg-gray-200 h-8 w-20 rounded"></div>
             ) : session ? (
               <div className="flex items-center space-x-4">
@@ -54,7 +56,7 @@ export default function Navbar() {
                   Dashboard
                 </Link>
 
-                {session.user.role === 'admin' && (
+                {session.user.role === "admin" && (
                   <Link
                     href="/admin"
                     className="text-black hover:text-gray-600 px-4 py-2 text-lg font-semibold transition-colors duration-200"
@@ -65,7 +67,10 @@ export default function Navbar() {
 
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
-                    <Button variant="ghost" className="relative h-8 w-8 rounded-full">
+                    <Button
+                      variant="ghost"
+                      className="relative h-8 w-8 rounded-full"
+                    >
                       <Avatar className="h-8 w-8">
                         <AvatarFallback>
                           {session.user.name?.charAt(0).toUpperCase()}
@@ -90,10 +95,17 @@ export default function Navbar() {
             ) : (
               <div className="flex items-center space-x-4">
                 <Link href="/login">
-                  <Button variant="ghost" className="text-lg font-semibold text-black hover:text-gray-600 hover:bg-gray-50">Sign In</Button>
+                  <Button
+                    variant="ghost"
+                    className="text-lg font-semibold text-black hover:text-gray-600 hover:bg-gray-50"
+                  >
+                    Sign In
+                  </Button>
                 </Link>
                 <Link href="/register">
-                  <Button className="text-lg font-semibold bg-black text-white hover:bg-gray-800 px-6 py-2">Sign Up</Button>
+                  <Button className="text-lg font-semibold bg-black text-white hover:bg-gray-800 px-6 py-2">
+                    Sign Up
+                  </Button>
                 </Link>
               </div>
             )}
@@ -106,7 +118,11 @@ export default function Navbar() {
               size="sm"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
-              {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+              {isMenuOpen ? (
+                <X className="h-6 w-6" />
+              ) : (
+                <Menu className="h-6 w-6" />
+              )}
             </Button>
           </div>
         </div>
@@ -133,7 +149,7 @@ export default function Navbar() {
                     Dashboard
                   </Link>
 
-                  {session.user.role === 'admin' && (
+                  {session.user.role === "admin" && (
                     <Link
                       href="/admin"
                       className="text-black hover:text-gray-600 block px-4 py-3 text-lg font-semibold transition-colors duration-200"

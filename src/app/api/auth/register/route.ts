@@ -1,6 +1,6 @@
 // src/app/api/auth/register/route.ts
 import { NextRequest } from 'next/server';
-import connectDB from '@/lib/database/mongodb';
+import { connectDB } from '@/lib/database/mongodb';
 import User from '@/models/User';
 import { registerSchema } from '@/lib/utils/validation';
 import { successResponse, errorResponse } from '@/lib/utils/response';
