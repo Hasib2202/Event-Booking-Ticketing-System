@@ -2,6 +2,7 @@
 import { Inter } from 'next/font/google';
 import { Providers } from '@/components/layout/Providers';
 import Navbar from '@/components/layout/Navbar';
+import Footer from '@/components/layout/Footer';
 import { Toaster } from 'sonner';
 import './globals.css';
 

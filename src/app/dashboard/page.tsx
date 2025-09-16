@@ -19,7 +19,7 @@ import {
 } from '@/components/ui/alert-dialog';
 import { Calendar, MapPin, DollarSign, Ticket, Trash2 } from 'lucide-react';
 import { format } from 'date-fns';
-import { useToast } from '@/components/ui/use-toast';
+import { toast } from 'sonner';
 
 interface Booking {
   _id: string;
@@ -42,36 +42,47 @@ interface Booking {
 export default function DashboardPage() {
   const [bookings, setBookings] = useState<Booking[]>([]);
   const [loading, setLoading] = useState(true);
-  const { data: session } = useSession();
-  const { toast } = useToast();
+  const { data: session, status } = useSession();
 
   useEffect(() => {
-    if (session) {
-      fetchBookings();
+    if (status === 'loading') return; // Still loading
+
+    if (!session) {
+      // Not authenticated, redirect to login
+      window.location.href = '/login';
+      return;
     }
-  }, [session]);
+
+    fetchBookings();
+  }, [session, status]);
 
   const fetchBookings = async () => {
     try {
       const response = await fetch('/api/bookings');
+
+      if (!response.ok) {
+        console.error('API response not ok:', response.status, response.statusText);
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const contentType = response.headers.get('content-type');
+      if (!contentType || !contentType.includes('application/json')) {
+        console.error('API returned non-JSON response:', contentType);
+        const text = await response.text();
+        console.error('Response text:', text.substring(0, 200));
+        throw new Error('API returned non-JSON response');
+      }
+
       const data = await response.json();
 
       if (data.success) {
         setBookings(data.data.bookings);
       } else {
-        toast({
-          variant: "destructive",
-          title: "Error",
-          description: "Failed to fetch bookings",
-        });
+        toast.error("Failed to fetch bookings");
       }
     } catch (error) {
       console.error('Failed to fetch bookings:', error);
-      toast({
-        variant: "destructive",
-        title: "Error",
-        description: "Failed to load your bookings",
-      });
+      toast.error("Failed to load your bookings");
     } finally {
       setLoading(false);
     }
@@ -86,27 +97,27 @@ export default function DashboardPage() {
       const data = await response.json();
 
       if (data.success) {
-        toast({
-          title: "Success",
-          description: "Booking cancelled successfully",
-        });
+        toast.success("Booking cancelled successfully");
         fetchBookings(); // Refresh bookings
       } else {
-        toast({
-          variant: "destructive",
-          title: "Error",
-          description: data.message || "Failed to cancel booking",
-        });
+        toast.error(data.message || "Failed to cancel booking");
       }
     } catch (error) {
       console.error('Failed to cancel booking:', error);
-      toast({
-        variant: "destructive",
-        title: "Error",
-        description: "Failed to cancel booking",
-      });
+      toast.error("Failed to cancel booking");
     }
   };
+
+  if (status === 'loading') {
+    return (
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="animate-pulse space-y-4">
+          <div className="h-8 bg-gray-200 rounded w-1/4"></div>
+          <div className="h-64 bg-gray-200 rounded"></div>
+        </div>
+      </div>
+    );
+  }
 
   if (!session) {
     return (

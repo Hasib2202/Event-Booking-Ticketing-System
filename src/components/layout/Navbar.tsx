@@ -59,7 +59,7 @@ export default function Navbar() {
                     href="/admin"
                     className="text-black hover:text-gray-600 px-4 py-2 text-lg font-semibold transition-colors duration-200"
                   >
-                    Admin
+                    Admin Panel
                   </Link>
                 )}
 

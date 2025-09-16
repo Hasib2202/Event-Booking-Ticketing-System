@@ -3,9 +3,11 @@ import { NextRequest } from 'next/server';
 import connectDB from '@/lib/database/mongodb';
 import Booking from '@/models/Booking';
 import Event from '@/models/Event';
+import User from '@/models/User';
 import { bookingSchema } from '@/lib/utils/validation';
 import { successResponse, errorResponse } from '@/lib/utils/response';
 import { requireAuth } from '@/lib/utils/auth';
+import { sendBookingConfirmationEmail } from '@/lib/utils/email';
 import mongoose from 'mongoose';
 
 export async function GET(request: NextRequest) {
@@ -69,27 +71,36 @@ export async function POST(request: NextRequest) {
     
     // Start transaction for atomic booking
     const session = await mongoose.startSession();
-    
+    let bookingData: any = null;
+    let eventData: any = null;
+    let userData: any = null;
+
     try {
       await session.withTransaction(async () => {
         // Get event and lock it
         const event = await Event.findById(validatedData.eventId).session(session);
-        
+
         if (!event) {
           throw new Error('Event not found');
         }
-        
+
         if (event.availableSeats < validatedData.numberOfTickets) {
           throw new Error('Not enough seats available');
         }
-        
+
         if (event.date < new Date()) {
           throw new Error('Cannot book tickets for past events');
         }
-        
+
+        // Get user details for email
+        const userDetails = await User.findById(user.id).session(session);
+        if (!userDetails) {
+          throw new Error('User not found');
+        }
+
         // Calculate total amount
         const totalAmount = event.price * validatedData.numberOfTickets;
-        
+
         // Create booking
         const booking = new Booking({
           userId: user.id,
@@ -99,19 +110,43 @@ export async function POST(request: NextRequest) {
           seats: validatedData.seats || [],
           bookingStatus: 'confirmed',
         });
-        
-        await booking.save({ session });
-        
+
+        const savedBooking = await booking.save({ session });
+
         // Update available seats
         await Event.findByIdAndUpdate(
           validatedData.eventId,
           { $inc: { availableSeats: -validatedData.numberOfTickets } },
           { session }
         );
+
+        // Store data for email sending
+        bookingData = savedBooking;
+        eventData = event;
+        userData = userDetails;
       });
-      
+
+      // Send confirmation email (outside transaction to avoid blocking)
+      if (bookingData && eventData && userData) {
+        try {
+          await sendBookingConfirmationEmail({
+            userEmail: userData.email,
+            userName: userData.name,
+            eventTitle: eventData.title,
+            eventDate: eventData.date.toISOString(),
+            eventVenue: eventData.venue,
+            numberOfTickets: bookingData.numberOfTickets,
+            totalAmount: bookingData.totalAmount,
+            bookingId: bookingData._id.toString(),
+          });
+        } catch (emailError) {
+          console.error('Failed to send confirmation email:', emailError);
+          // Don't fail the booking if email fails
+        }
+      }
+
       return successResponse(null, 'Booking successful', 201);
-      
+
     } finally {
       await session.endSession();
     }
