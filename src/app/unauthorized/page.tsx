@@ -23,6 +23,9 @@ export default function UnauthorizedPage() {
             <Link href="/">
               <Button className="w-full">Go to Home</Button>
             </Link>
+            <div>
+              
+            </div>
             <Link href="/dashboard">
               <Button variant="outline" className="w-full">Go to Dashboard</Button>
             </Link>

@@ -16,7 +16,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Loader2, ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
-import { useToast } from '@/components/ui/use-toast';
+import { toast } from 'sonner';
 
 type EventFormData = {
   title: string;
@@ -33,7 +33,6 @@ export default function CreateEventPage() {
   const [error, setError] = useState('');
   const { data: session, status } = useSession();
   const router = useRouter();
-  const { toast } = useToast();
 
   const {
     register,
@@ -73,15 +72,14 @@ export default function CreateEventPage() {
       const result = await response.json();
 
       if (response.ok) {
-        toast({
-          title: "Success!",
-          description: "Event created successfully",
-        });
+        toast.success('Event created successfully!');
         router.push('/admin/events');
       } else {
+        toast.error(result.message || 'Failed to create event');
         setError(result.message || 'Failed to create event');
       }
     } catch (error) {
+      toast.error('An error occurred while creating the event');
       setError('An error occurred while creating the event');
     } finally {
       setIsLoading(false);

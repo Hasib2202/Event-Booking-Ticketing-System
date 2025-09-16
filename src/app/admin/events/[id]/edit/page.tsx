@@ -16,7 +16,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Loader2, ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
-import { toast } from '@/lib/utils/toast';
+import { toast } from 'sonner';
 
 type EventFormData = {
   title: string;
@@ -131,15 +131,14 @@ export default function EditEventPage({ params }: { params: Promise<{ id: string
       const result = await response.json();
 
       if (response.ok) {
-        toast({
-          title: "Success!",
-          description: "Event updated successfully",
-        });
+        toast.success('Event updated successfully!');
         router.push('/admin/events');
       } else {
+        toast.error(result.message || 'Failed to update event');
         setError(result.message || 'Failed to update event');
       }
     } catch (error) {
+      toast.error('An error occurred while updating the event');
       setError('An error occurred while updating the event');
     } finally {
       setIsLoading(false);

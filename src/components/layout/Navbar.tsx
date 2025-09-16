@@ -23,22 +23,22 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="bg-white shadow-sm border-b">
+    <nav className="bg-white border-b border-gray-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-16">
+        <div className="flex justify-between items-center h-20">
           {/* Logo */}
           <div className="flex items-center">
-            <Link href="/" className="flex items-center space-x-2">
-              <Calendar className="h-8 w-8 text-blue-600" />
-              <span className="text-xl font-bold text-gray-900">EventBook</span>
+            <Link href="/" className="flex items-center space-x-3">
+              <Calendar className="h-10 w-10 text-black" />
+              <span className="text-2xl font-bold text-black tracking-tight">EventBook</span>
             </Link>
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-4">
+          <div className="hidden md:flex items-center space-x-8">
             <Link
               href="/events"
-              className="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium"
+              className="text-black hover:text-gray-600 px-4 py-2 text-lg font-semibold transition-colors duration-200"
             >
               Events
             </Link>
@@ -49,7 +49,7 @@ export default function Navbar() {
               <div className="flex items-center space-x-4">
                 <Link
                   href="/dashboard"
-                  className="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium"
+                  className="text-black hover:text-gray-600 px-4 py-2 text-lg font-semibold transition-colors duration-200"
                 >
                   Dashboard
                 </Link>
@@ -57,7 +57,7 @@ export default function Navbar() {
                 {session.user.role === 'admin' && (
                   <Link
                     href="/admin"
-                    className="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium"
+                    className="text-black hover:text-gray-600 px-4 py-2 text-lg font-semibold transition-colors duration-200"
                   >
                     Admin
                   </Link>
@@ -90,10 +90,10 @@ export default function Navbar() {
             ) : (
               <div className="flex items-center space-x-4">
                 <Link href="/login">
-                  <Button variant="ghost">Sign In</Button>
+                  <Button variant="ghost" className="text-lg font-semibold text-black hover:text-gray-600 hover:bg-gray-50">Sign In</Button>
                 </Link>
                 <Link href="/register">
-                  <Button>Sign Up</Button>
+                  <Button className="text-lg font-semibold bg-black text-white hover:bg-gray-800 px-6 py-2">Sign Up</Button>
                 </Link>
               </div>
             )}
@@ -117,7 +117,7 @@ export default function Navbar() {
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 border-t">
               <Link
                 href="/events"
-                className="text-gray-600 hover:text-gray-900 block px-3 py-2 rounded-md text-base font-medium"
+                className="text-black hover:text-gray-600 block px-4 py-3 text-lg font-semibold transition-colors duration-200"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Events
@@ -127,7 +127,7 @@ export default function Navbar() {
                 <>
                   <Link
                     href="/dashboard"
-                    className="text-gray-600 hover:text-gray-900 block px-3 py-2 rounded-md text-base font-medium"
+                    className="text-black hover:text-gray-600 block px-4 py-3 text-lg font-semibold transition-colors duration-200"
                     onClick={() => setIsMenuOpen(false)}
                   >
                     Dashboard
@@ -136,7 +136,7 @@ export default function Navbar() {
                   {session.user.role === 'admin' && (
                     <Link
                       href="/admin"
-                      className="text-gray-600 hover:text-gray-900 block px-3 py-2 rounded-md text-base font-medium"
+                      className="text-black hover:text-gray-600 block px-4 py-3 text-lg font-semibold transition-colors duration-200"
                       onClick={() => setIsMenuOpen(false)}
                     >
                       Admin
@@ -146,7 +146,7 @@ export default function Navbar() {
                   <Button
                     variant="ghost"
                     onClick={handleSignOut}
-                    className="w-full justify-start px-3 py-2 text-base font-medium"
+                    className="w-full justify-start px-4 py-3 text-lg font-semibold text-black hover:text-gray-600 hover:bg-gray-50"
                   >
                     Sign Out
                   </Button>
@@ -155,14 +155,14 @@ export default function Navbar() {
                 <>
                   <Link
                     href="/login"
-                    className="text-gray-600 hover:text-gray-900 block px-3 py-2 rounded-md text-base font-medium"
+                    className="text-black hover:text-gray-600 block px-4 py-3 text-lg font-semibold transition-colors duration-200"
                     onClick={() => setIsMenuOpen(false)}
                   >
                     Sign In
                   </Link>
                   <Link
                     href="/register"
-                    className="text-gray-600 hover:text-gray-900 block px-3 py-2 rounded-md text-base font-medium"
+                    className="text-black hover:text-gray-600 block px-4 py-3 text-lg font-semibold transition-colors duration-200"
                     onClick={() => setIsMenuOpen(false)}
                   >
                     Sign Up
