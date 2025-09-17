@@ -46,6 +46,7 @@ A full-stack event booking and ticketing platform built with Next.js, React, and
 ## 🛠 Complete Technology Stack
 
 ### Frontend Technologies
+
 - **Next.js 15** - React framework with App Router
 - **React 19** - UI library
 - **TypeScript** - Type safety
@@ -58,6 +59,7 @@ A full-stack event booking and ticketing platform built with Next.js, React, and
 - **date-fns** - Date utilities
 
 ### Backend & Database
+
 - **Next.js API Routes** - Server-side API
 - **NextAuth.js** - Authentication
 - **MongoDB** - Database
@@ -66,11 +68,13 @@ A full-stack event booking and ticketing platform built with Next.js, React, and
 - **JWT** - Token-based authentication
 
 ### Cloud Services
+
 - **Cloudinary** - Image storage
 - **Nodemailer** - Email service
 - **Vercel** - Deployment platform
 
 ### Development Tools
+
 - **ESLint** - Code linting
 - **TypeScript** - Type checking
 - **dotenv** - Environment variables
@@ -86,28 +90,34 @@ A full-stack event booking and ticketing platform built with Next.js, React, and
 ## 🔧 Installation
 
 1. **Clone the repository**
+
    ```bash
    git clone <your-repo-url>
    cd event-booking-system
    ```
 
 2. **Install dependencies**
+
    ```bash
    npm install
    ```
 
 3. **Set up environment variables**
+
    ```bash
    cp .env.example .env.local
    ```
+
    Fill in your environment variables (see [Environment Variables](#environment-variables))
 
 4. **Seed the database**
+
    ```bash
    npm run seed
    ```
 
 5. **Start the development server**
+
    ```bash
    npm run dev
    ```
@@ -121,7 +131,7 @@ Create a `.env.local` file in the root directory with the following variables:
 
 ```env
 # Database
-MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/event-booking-system
+MONGODB_URI=your-mongodb-uri-here
 
 # NextAuth
 NEXTAUTH_SECRET=your-nextauth-secret
@@ -148,6 +158,7 @@ CLOUDINARY_API_SECRET=your-api-secret
 The application uses MongoDB with the following collections:
 
 ### Events Collection
+
 ```javascript
 {
   title: String,
@@ -166,6 +177,7 @@ The application uses MongoDB with the following collections:
 ```
 
 ### Users Collection
+
 ```javascript
 {
   name: String,
@@ -178,6 +190,7 @@ The application uses MongoDB with the following collections:
 ```
 
 ### Bookings Collection
+
 ```javascript
 {
   eventId: String,
@@ -191,6 +204,7 @@ The application uses MongoDB with the following collections:
 ```
 
 ### Seats Collection (Ready for seat selection feature)
+
 ```javascript
 {
   eventId: String,
@@ -208,17 +222,20 @@ The application uses MongoDB with the following collections:
 ## 🚀 Running the Application
 
 ### Development Mode
+
 ```bash
 npm run dev
 ```
 
 ### Production Build
+
 ```bash
 npm run build
 npm start
 ```
 
 ### Other Scripts
+
 ```bash
 # Seed database with sample data
 npm run seed
@@ -235,10 +252,12 @@ npm run lint
 After running the seed script, use these credentials to test the application:
 
 ### Admin Account
+
 - **Email**: admin@eventbook.com
 - **Password**: admin123
 
 ### User Accounts
+
 - **Email**: john@example.com / **Password**: user123
 - **Email**: jane@example.com / **Password**: user123
 
@@ -277,10 +296,12 @@ scripts/
 ## 📡 API Documentation
 
 ### Authentication
+
 - `POST /api/auth/register` - User registration
 - `POST /api/auth/[...nextauth]` - NextAuth endpoints
 
 ### Events
+
 - `GET /api/events` - Fetch all events (with pagination, search, filters)
 - `POST /api/events` - Create new event (admin only)
 - `GET /api/events/[id]` - Fetch single event
@@ -288,20 +309,24 @@ scripts/
 - `DELETE /api/events/[id]` - Delete event (admin only)
 
 ### Bookings
+
 - `GET /api/bookings` - Fetch user bookings
 - `POST /api/bookings` - Create new booking
 - `GET /api/bookings/[id]` - Fetch single booking
 - `DELETE /api/bookings/[id]` - Cancel booking
 
 ### Admin
+
 - `GET /api/admin/stats` - Dashboard statistics
 
 ### Upload
+
 - `POST /api/upload` - Upload event images
 
 ## 🎯 Assignment Requirements Status
 
 ### ✅ Core Features (COMPLETED)
+
 - **User Authentication**: ✅ JWT with NextAuth.js - Complete authentication system with secure login/logout
 - **Event List Page**: ✅ Displays all events with title, date, venue, price - Enhanced with search and filtering
 - **Event Detail Page**: ✅ Shows complete event information with ticket booking functionality
@@ -311,12 +336,14 @@ scripts/
 - **Database Integration**: ✅ MongoDB with Mongoose ODM - Complete schema design and relationships
 
 ### ✅ Bonus Features (COMPLETED)
+
 - **Seat Selection Infrastructure**: ✅ Complete seat model and database schema ready for UI implementation
 - **Role-based Access Control**: ✅ Full admin panel with event management (add/update/delete events)
 - **Email Confirmation**: ✅ Beautiful HTML email templates for booking confirmations and cancellations
 - **Cloud Deployment Ready**: ✅ Configured for Vercel deployment with environment variables
 
 ### 🚀 Additional Features Implemented
+
 - **Image Upload System**: Cloudinary integration with automatic optimization
 - **Advanced Security**: Route-based middleware protection and input validation
 - **Modern UI/UX**: Responsive design with Radix UI components and Tailwind CSS
@@ -333,6 +360,7 @@ The application is ready to be deployed on platforms like Vercel, Netlify, or Ra
 ### Deploy on Vercel (Recommended)
 
 1. **Push to GitHub**
+
    ```bash
    git add .
    git commit -m "Initial commit"
@@ -340,6 +368,7 @@ The application is ready to be deployed on platforms like Vercel, Netlify, or Ra
    ```
 
 2. **Connect to Vercel**
+
    - Visit [vercel.com](https://vercel.com)
    - Import your GitHub repository
    - Add environment variables in Vercel dashboard
@@ -355,6 +384,7 @@ The application is ready to be deployed on platforms like Vercel, Netlify, or Ra
 ### Manual Deployment Steps
 
 1. **Build the application**
+
    ```bash
    npm run build
    ```
@@ -366,12 +396,14 @@ The application is ready to be deployed on platforms like Vercel, Netlify, or Ra
 ## 🎯 Development Approach & Assumptions
 
 ### Key Decisions
+
 - **Full-Stack Next.js**: Chosen for integrated frontend/backend development
 - **MongoDB**: NoSQL database for flexible event and booking data
 - **Shadcn/ui**: Modern component library for consistent UI design
 - **TypeScript**: Full type safety across the application
 
 ### Deployment
+
 - **Platform**: Deployed on Vercel for optimal Next.js performance
 - **Database**: MongoDB Atlas for production database hosting
 - **Images**: Cloudinary for optimized image storage and delivery
