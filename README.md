@@ -4,7 +4,7 @@ A full-stack event booking and ticketing platform built with Next.js, React, and
 
 ## 🚀 Live Demo
 
-[Add your deployed link here]
+[https://event-booking-ticketing-system.vercel.app]
 
 ## 📋 Table of Contents
 
