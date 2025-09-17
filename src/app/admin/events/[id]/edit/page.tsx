@@ -65,17 +65,17 @@ export default function EditEventPage({ params }: { params: Promise<{ id: string
 
   const categoryValue = watch('category');
 
-  // Redirect if not admin
-  if (status !== 'loading' && (!session || session.user.role !== 'admin')) {
-    router.push('/login');
-    return null;
-  }
-
   useEffect(() => {
     if (session?.user?.role === 'admin') {
       fetchEvent();
     }
   }, [id, session]);
+
+  // Redirect if not admin
+  if (status !== 'loading' && (!session || session.user.role !== 'admin')) {
+    router.push('/login');
+    return null;
+  }
 
   const fetchEvent = async () => {
     try {
@@ -100,20 +100,12 @@ export default function EditEventPage({ params }: { params: Promise<{ id: string
           image: eventData.image || '',
         });
       } else {
-        toast({
-          variant: "destructive",
-          title: "Error",
-          description: "Event not found",
-        });
+        toast.error("Event not found");
         router.push('/admin/events');
       }
     } catch (error) {
       console.error('Failed to fetch event:', error);
-      toast({
-        variant: "destructive",
-        title: "Error",
-        description: "Failed to load event details",
-      });
+      toast.error("Failed to load event details");
     } finally {
       setLoadingEvent(false);
     }
@@ -182,7 +174,7 @@ export default function EditEventPage({ params }: { params: Promise<{ id: string
           </Button>
         </Link>
         <h1 className="text-3xl font-bold text-gray-900 mb-2">Edit Event</h1>
-        <p className="text-gray-600">Update the details for "{event.title}"</p>
+        <p className="text-gray-600">Update the details for &quot;{event.title}&quot;</p>
       </div>
 
       <Card>
