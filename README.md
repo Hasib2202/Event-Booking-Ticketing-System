@@ -415,4 +415,4 @@ This project is created for educational and portfolio purposes, demonstrating fu
 
 ---
 
-**Built with ❤️ using Next.js, React, and MongoDB**
+**Built with Hard working using Next.js, React, and MongoDB**
