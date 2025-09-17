@@ -9,7 +9,7 @@ A full-stack event booking and ticketing platform built with Next.js, React, and
 ## 📋 Table of Contents
 
 - [Features](#-features)
-- [Tech Stack](#-tech-stack)
+- [Tech Stack](#-complete-technology-stack)
 - [Prerequisites](#-prerequisites)
 - [Installation](#-installation)
 - [Environment Variables](#-environment-variables)
