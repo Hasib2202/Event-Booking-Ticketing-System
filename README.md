@@ -46,41 +46,34 @@ A full-stack event booking and ticketing platform built with Next.js, React, and
 ## 🛠 Complete Technology Stack
 
 ### Frontend Technologies
-- **Next.js 15** - React framework with App Router for server-side rendering
-- **React 19** - Latest React version with concurrent features
-- **TypeScript** - Full type safety and better developer experience
-- **Tailwind CSS 4** - Utility-first CSS framework for rapid UI development
-- **Radix UI** - Headless, accessible UI components
-- **React Hook Form** - Performant forms with minimal re-renders
-- **Zod** - TypeScript-first schema validation
-- **Sonner** - Beautiful toast notifications
-- **Lucide React** - Modern icon library
-- **date-fns** - Modern date utility library
-- **Embla Carousel** - Touch-friendly carousel component
+- **Next.js 15** - React framework with App Router
+- **React 19** - UI library
+- **TypeScript** - Type safety
+- **Tailwind CSS 4** - Styling framework
+- **Shadcn/ui** - Modern UI component library built on Radix UI
+- **React Hook Form** - Form management
+- **Zod** - Schema validation
+- **Sonner** - Toast notifications
+- **Lucide React** - Icons
+- **date-fns** - Date utilities
 
 ### Backend & Database
-- **Next.js API Routes** - Full-stack API endpoints with middleware support
-- **NextAuth.js** - Complete authentication solution with JWT
-- **MongoDB** - NoSQL database with flexible schema
-- **Mongoose** - Object Document Mapping with validation
-- **bcryptjs** - Secure password hashing
-- **JWT (jsonwebtoken)** - Stateless authentication tokens
+- **Next.js API Routes** - Server-side API
+- **NextAuth.js** - Authentication
+- **MongoDB** - Database
+- **Mongoose** - ODM
+- **bcryptjs** - Password hashing
+- **JWT** - Token-based authentication
 
-### Cloud & External Services
-- **Cloudinary** - Image upload, storage, and optimization
-- **Nodemailer** - Email delivery service integration
-- **MongoDB Atlas** - Cloud-hosted database (production ready)
+### Cloud Services
+- **Cloudinary** - Image storage
+- **Nodemailer** - Email service
+- **Vercel** - Deployment platform
 
-### Development & Build Tools
-- **ESLint** - Code linting with Next.js configuration
-- **TypeScript Compiler** - Type checking and compilation
-- **PostCSS** - CSS processing and optimization
-- **dotenv** - Environment variable management
-
-### UI/UX Libraries
-- **Class Variance Authority** - CSS class composition
-- **clsx** - Conditional className utility
-- **tailwind-merge** - Intelligent Tailwind class merging
+### Development Tools
+- **ESLint** - Code linting
+- **TypeScript** - Type checking
+- **dotenv** - Environment variables
 
 ## 📋 Prerequisites
 
@@ -370,87 +363,19 @@ The application is ready to be deployed on platforms like Vercel, Netlify, or Ra
 
 3. **Deploy to your hosting platform**
 
-## 🎯 Development Approach & Key Decisions
+## 🎯 Development Approach & Assumptions
 
-### Architecture Decisions
-- **Full-Stack Next.js**: Chose Next.js for its SSR capabilities, API routes, and seamless full-stack development
-- **MongoDB + Mongoose**: Selected for flexible schema design and excellent JavaScript integration
-- **Component-First Design**: Built reusable UI components with Radix UI for accessibility and consistency
-- **Type-Safe Development**: Full TypeScript implementation from models to UI components
+### Key Decisions
+- **Full-Stack Next.js**: Chosen for integrated frontend/backend development
+- **MongoDB**: NoSQL database for flexible event and booking data
+- **Shadcn/ui**: Modern component library for consistent UI design
+- **TypeScript**: Full type safety across the application
 
-### Security Implementation
-- **JWT Authentication**: Stateless authentication with NextAuth.js for scalability
-- **Route Protection**: Middleware-based protection for admin and user-specific routes
-- **Input Validation**: Zod schemas for both client and server-side validation
-- **Password Security**: bcrypt with salt rounds for secure password hashing
-- **CORS & Security Headers**: Proper security headers and cross-origin request handling
-
-### Database Design
-- **Normalized Relations**: Proper relationships between Users, Events, Bookings, and Seats
-- **Atomic Transactions**: MongoDB transactions for consistent booking operations
-- **Indexing Strategy**: Optimized queries with strategic database indexes
-- **Seat Management**: Infrastructure ready for detailed seat selection features
-
-### User Experience Focus
-- **Progressive Enhancement**: Works without JavaScript, enhanced with it
-- **Responsive Design**: Mobile-first approach with Tailwind CSS
-- **Loading States**: Skeleton loading for better perceived performance
-- **Error Handling**: Graceful error handling with user-friendly messages
-- **Real-time Updates**: Immediate feedback for all user actions
-
-### Performance Optimizations
-- **Image Optimization**: Cloudinary integration with automatic compression
-- **Code Splitting**: Next.js automatic code splitting and lazy loading
-- **Database Optimization**: Efficient queries with pagination and filtering
-- **Caching Strategy**: Proper caching headers and static asset optimization
-
-## 🔧 Technical Assumptions & Constraints
-
-### Assumptions Made
-1. **Modern Browser Support**: Assumes ES6+ support (95%+ of users)
-2. **JavaScript Enabled**: Enhanced experience requires JavaScript
-3. **Email Service**: SMTP service available for notifications
-4. **Image Storage**: Cloudinary account for production image handling
-5. **Database Scale**: Designed for thousands of events and users
-
-### Constraints Addressed
-- **Seat Booking Conflicts**: Atomic transactions prevent double-booking
-- **File Upload Limits**: Cloudinary handles large file optimization
-- **Rate Limiting**: Ready for implementation with Next.js middleware
-- **Email Delivery**: Graceful handling of email service failures
-- **Browser Compatibility**: Polyfills included where necessary
-
-## 🎉 Future Enhancements Ready
-
-The application architecture supports easy implementation of:
-
-- **Visual Seat Selection**: Complete seat model and database schema ready
-- **Payment Processing**: Stripe/PayPal integration points prepared
-- **Multi-language Support**: i18n structure ready for implementation
-- **Push Notifications**: WebPush service worker foundation ready
-- **QR Code Tickets**: Digital ticket generation infrastructure ready
-- **Advanced Analytics**: Data structure optimized for reporting
-- **Social Authentication**: NextAuth.js supports multiple providers
-- **Event Categories**: Expandable category system with filtering
-
-## 📊 Project Metrics
-
-- **Total Files**: 60+ source files
-- **Lines of Code**: 4,000+ lines
-- **Components**: 25+ reusable UI components
-- **API Endpoints**: 15+ RESTful endpoints
-- **Database Models**: 4 comprehensive models
-- **Test Coverage**: Structured for easy testing implementation
-
-## 🤝 Development Standards
-
-This project demonstrates:
-- **Clean Code**: Self-documenting code with meaningful variable names
-- **SOLID Principles**: Single responsibility and dependency inversion
-- **Error Handling**: Comprehensive error boundaries and fallbacks
-- **Code Organization**: Logical file structure and separation of concerns
-- **Documentation**: Inline comments and comprehensive README
-- **Version Control**: Semantic commit messages and proper branching
+### Deployment
+- **Platform**: Deployed on Vercel for optimal Next.js performance
+- **Database**: MongoDB Atlas for production database hosting
+- **Images**: Cloudinary for optimized image storage and delivery
+- **Email**: SMTP service integration for booking notifications
 
 ## 📄 License & Usage
 
