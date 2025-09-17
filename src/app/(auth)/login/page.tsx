@@ -44,10 +44,12 @@ export default function LoginPage() {
 
       if (result?.error) {
         toast.error('Invalid email or password');
-      } else {
+      } else if (result?.ok) {
         toast.success('Login successful! Welcome back.');
-        router.push('/dashboard');
-        router.refresh();
+        // Wait a moment for session to be established
+        setTimeout(() => {
+          window.location.href = '/dashboard';
+        }, 500);
       }
     } catch (error) {
       toast.error('An error occurred during login');
