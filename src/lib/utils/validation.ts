@@ -25,6 +25,7 @@ export const eventSchema = z.object({
   venue: z.string().min(1, 'Venue is required'),
   price: z.number().min(0, 'Price must be positive'),
   totalSeats: z.number().min(1, 'Must have at least 1 seat'),
+  availableSeats: z.number().min(0).optional(),
   category: z.string().min(1, 'Category is required'),
   image: z.string().optional(),
 });
